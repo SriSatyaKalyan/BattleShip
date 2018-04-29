@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Battleship {
 	
 	public static void main(String[] args) {
@@ -27,22 +25,22 @@ public class Battleship {
 				
 				//Having the numerics 0-9 on top and bottom
 				if(i==0 || i==11){
+					int count = 0;
 					for (int j1 = 2; j1 < (grid[i].length) - 2; j1++) {
-						for (int count = 0; count < 10; count++) {
+						if(count < 10) {
 							grid[i][j1] = Integer.toString(count);
-							//Facing issues here as the whole loop is running the 
-							//count till 9 and then entering the value
+							count++;
 						}
 					}
 				}
 				
 				//Having the numerics 0-9 on left and right
 				if(j==0 || j==13){
+					int count = 0;
 					for (int i1 = 1; i1 < (grid.length) - 1; i1++) {
-						for (int count = 0; count < 10; count++) {
+						if(count < 10) {
 							grid[i1][j] = String.valueOf(count);
-							//Facing issues here as the whole loop is running the 
-							//count till 9 and then entering the value
+							count++;
 						}
 					}
 				}
