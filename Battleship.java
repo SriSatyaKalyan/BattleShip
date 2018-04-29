@@ -1,6 +1,9 @@
+import java.util.Scanner;
+
 public class Battleship {
 	
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in); 
 		System.out.println("****Welcome to the game of BattleShip****\n");
 		System.out.println("Right now, the sea is empty\n");
 		//System.out.println(String.valueOf("0"));
@@ -58,5 +61,49 @@ public class Battleship {
 		   System.out.println();
 		}
 		
+        //Code asking the user to enter in the coordinates for where to place a ship
+		System.out.println("\n");
+		for (int number = 1; number<6; number++) {
+			System.out.print("Enter the coordinates of the ship numbered " + number + "\n");
+			System.out.print("Enter X coordinate for your ship: ");
+	        int x = input.nextInt();
+	        System.out.print("Enter Y coordinate for your ship: ");
+	        int y = input.nextInt();
+			if(((x+1)<12 && (y+2)<12)) {
+				if (grid[x+1][y+2] != "@") {
+					grid[x+1][y+2] = "@";
+					System.out.println("The ship is introduced into the sea");
+				}else {
+					System.out.println("There is already a specific ship in that location. Please re-enter coordinates.");
+					number--;
+				}
+			}else {
+				System.out.println("The ship shall be outside the sea. Please re-enter coordinates.");
+				number--;
+			}
+			
+			//Displaying the grid
+			for (String[] x1 : grid){
+			   for (String y1 : x1)
+			   {
+			        System.out.print(y1 + " ");
+			   }
+			   System.out.println();
+			}
+			System.out.println("\n");
+			
+	    }
+
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
