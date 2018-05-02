@@ -97,14 +97,14 @@ public class Battleship {
 	    }
 		
 		//Displaying the grid
-		for (String[] x1 : grid){
-		   for (String y1 : x1)
-		   {
-		        System.out.print(y1 + " ");
-		   }
-		   System.out.println();
-		}
-		System.out.println("\n");
+//		for (String[] x1 : grid){
+//		   for (String y1 : x1)
+//		   {
+//		        System.out.print(y1 + " ");
+//		   }
+//		   System.out.println();
+//		}
+//		System.out.println("\n");
 		
 		//Code where the computer randomly inserts ships in the sea.
 		
@@ -157,8 +157,62 @@ public class Battleship {
 		}
 		System.out.println("\n");	
 		
-
+		//////////////////////////////////////////////////////////////////////////////////////////
+		//Battle starts
+		int user_guess = 0;
+		int comp_guess = 0;
 		
+		//User guessing the ship
+		for (int number = 1; number < 11; number++) {
+			System.out.println("YOUR TURN");
+			//System.out.print("Enter the coordinates of the ship numbered " + number + "\n");
+			
+			System.out.print("Enter X coordinate: ");
+			int x = input.nextInt();
+	        System.out.print("Enter Y coordinate: ");
+	        int y = input.nextInt();
+			
+	        if(((x+1)<12 && (y+2)<12 && (x+1)>0 && (y+2)>0)) {
+				if (grid[x+1][y+2] != "#") {                        //Correct guess
+					grid[x+1][y+2] = "!";
+					System.out.println("Boom! You sunk the ship!");
+				}else {                                             //Own ship guess
+					if (grid[x+1][y+2] != "@") {
+						grid[x+1][y+2] = "x";
+						System.out.println("Oh no, you sunk your own ship :(");
+						number--;
+					}
+				}
+			}else {                                                 //Wrong guess
+				System.out.println("Sorry, you missed");
+				grid[x+1][y+2] = "-";;
+			}
+	        
+			//Code to calculate user_guess not crossing 5.
+	        /////////////////////////////////////////////
+	        
+			//Computer guessing the ship
+			
+			Random rand = new Random();
+			
+			int xC = rand.nextInt(9)+1;
+	        //System.out.print("Enter Y coordinate for your ship: ");
+	        
+	        int yC = rand.nextInt(9)+1;
+	        
+			if(((xC+1)<12 && (yC+2)<12)) {
+				if (grid[xC+1][yC+2] != "#") {
+					grid[xC+1][yC+2] = "#";
+					System.out.println("" + number + "ship DEPLOYED");
+				}else {
+					//System.out.println("There is already a specific ship in that location. Please re-enter coordinates.");
+					number--;
+				}
+			}else {
+				//System.out.println("The ship shall be outside the sea. Please re-enter coordinates.");
+				number--;
+			}
+		}
 		
 	}
 }
