@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Battleship {
 	
@@ -62,14 +63,16 @@ public class Battleship {
 		}
 		
         //Code asking the user to enter in the coordinates for where to place a ship
-		System.out.println("\n");
-		for (int number = 1; number<6; number++) {
+		
+		System.out.println("\nDEPLOY YOUR SHIPS:");
+		for (int number = 1; number < 6; number++) {
+			System.out.println("\n");
 			System.out.print("Enter the coordinates of the ship numbered " + number + "\n");
 			System.out.print("Enter X coordinate for your ship: ");
 	        int x = input.nextInt();
 	        System.out.print("Enter Y coordinate for your ship: ");
 	        int y = input.nextInt();
-			if(((x+1)<12 && (y+2)<12)) {
+			if(((x+1)<12 && (y+2)<12 && (x+1)>0 && (y+2)>0)) {
 				if (grid[x+1][y+2] != "@") {
 					grid[x+1][y+2] = "@";
 					System.out.println("The ship is introduced into the sea");
@@ -82,18 +85,81 @@ public class Battleship {
 				number--;
 			}
 			
-			//Displaying the grid
-			for (String[] x1 : grid){
-			   for (String y1 : x1)
-			   {
-			        System.out.print(y1 + " ");
-			   }
-			   System.out.println();
-			}
-			System.out.println("\n");
-			
+//			//Displaying the grid
+//			for (String[] x1 : grid){
+//			   for (String y1 : x1)
+//			   {
+//			        System.out.print(y1 + " ");
+//			   }
+//			   System.out.println();
+//			}
+//			System.out.println("\n");	
 	    }
+		
+		//Displaying the grid
+		for (String[] x1 : grid){
+		   for (String y1 : x1)
+		   {
+		        System.out.print(y1 + " ");
+		   }
+		   System.out.println();
+		}
+		System.out.println("\n");
+		
+		//Code where the computer randomly inserts ships in the sea.
+		
+		System.out.println("\nComputer is deploying ships");
+		for (int number = 1; number < 6; number++) {
+			
+			//System.out.println();
+			//System.out.print("Enter the coordinates of the ship numbered " + number + "\n");
+			//System.out.print("Enter X coordinate for your ship: ");
+	        
+			Random rand = new Random();
+			
+			int x = rand.nextInt(9)+1;
+	        //System.out.print("Enter Y coordinate for your ship: ");
+	        
+	        int y = rand.nextInt(9)+1;
+	        
+			if(((x+1)<12 && (y+2)<12)) {
+				if (grid[x+1][y+2] != "#") {
+					grid[x+1][y+2] = "#";
+					System.out.println("" + number + "ship DEPLOYED");
+				}else {
+					//System.out.println("There is already a specific ship in that location. Please re-enter coordinates.");
+					number--;
+				}
+			}else {
+				//System.out.println("The ship shall be outside the sea. Please re-enter coordinates.");
+				number--;
+			}
+			
+			//Displaying the grid
+//			for (String[] x1 : grid){
+//			   for (String y1 : x1)
+//			   {
+//			        System.out.print(y1 + " ");
+//			   }
+//			   System.out.println();
+//			}
+//			System.out.println("\n");	
+		}
+		
+		//Displaying the grid
+		System.out.println("\n");
+		for (String[] x1 : grid){
+		   for (String y1 : x1)
+		   {
+		        System.out.print(y1 + " ");
+		   }
+		   System.out.println();
+		}
+		System.out.println("\n");	
+		
 
+		
+		
 	}
 }
 
