@@ -159,6 +159,7 @@ public class Battleship {
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//Battle starts
+		System.out.println("BattleShip Game Starts\n");
 		int user_guess = 0;
 		int comp_guess = 0;
 		
@@ -173,57 +174,70 @@ public class Battleship {
 	        int y = input.nextInt();
 			
 	        if(((x+1)<12 && (y+2)<12 && (x+1)>0 && (y+2)>0)) {
-				if (grid[x+1][y+2] != "#") {                        //Correct guess
+				if (grid[x+1][y+2] == "#") {                        //Correct guess
 					grid[x+1][y+2] = "!";
-					System.out.println("Boom! You sunk the ship!");
+					System.out.println("Boom! You sunk the COMPs ship!\n");
+					user_guess += 1;
 				}else {                                             //Own ship guess
-					if (grid[x+1][y+2] != "@") {
+					if (grid[x+1][y+2] == "@") {
 						grid[x+1][y+2] = "x";
-						System.out.println("Oh no, you sunk your own ship :(");
-						number--;
+						System.out.println("Oh no, you sunk your own ship :(\n");
 					}
 				}
 			}else {                                                 //Wrong guess
-				System.out.println("Sorry, you missed");
+				System.out.println("Sorry, you missed\n");
 				grid[x+1][y+2] = "-";;
 			}
 	        
 			//Code to calculate user_guess not crossing 5.
+	        
+	        if (user_guess == 5) {
+	        	break;
+	        }
+	        
+			//Displaying the grid
+			System.out.println("\n");
+			for (String[] x1 : grid){
+			   for (String y1 : x1)
+			   {
+			        System.out.print(y1 + " ");
+			   }
+			   System.out.println();
+			}
+			System.out.println("\n");
+	        
 	        /////////////////////////////////////////////
 	        
 			//Computer guessing the ship
 			
+			System.out.println("Computer's TURN\n");
 			Random rand = new Random();
-			
 			int xC = rand.nextInt(9)+1;
-	        //System.out.print("Enter Y coordinate for your ship: ");
-	        
 	        int yC = rand.nextInt(9)+1;
 	        
 			if(((xC+1)<12 && (yC+2)<12)) {
-				if (grid[xC+1][yC+2] != "#") {
-					grid[xC+1][yC+2] = "#";
-					System.out.println("" + number + "ship DEPLOYED");
+				if (grid[xC+1][yC+2] == "@") {              //Correct guess
+					grid[xC+1][yC+2] = "x";
+					System.out.println("Boom! You sunk the USERs ship!\n");
+					comp_guess += 1;
 				}else {
-					//System.out.println("There is already a specific ship in that location. Please re-enter coordinates.");
-					number--;
+					if (grid[xC+1][yC+2] == "#") {          //Own ship guess
+						grid[xC+1][yC+2] = "!";
+						System.out.println("Oh no, you sunk your own ship :)\n");
+					}
 				}
-			}else {
-				//System.out.println("The ship shall be outside the sea. Please re-enter coordinates.");
-				number--;
+			}else {                                         //Wrong guess
+				System.out.println("Sorry, you missed\n");
+				grid[x+1][y+2] = "+";;
 			}
+			
+			//Code to calculate comp_guess not crossing 5.
+			
+	        if (comp_guess == 5) {
+	        	break;
+	        }
+			
 		}
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
