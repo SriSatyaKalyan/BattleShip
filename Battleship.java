@@ -164,10 +164,11 @@ public class Battleship {
 		int comp_guess = 0;
 		
 		//User guessing the ship
-		for (int number = 1; number < 11; number++) {
+		for (int number = 1; number < 6; number++) {
 			System.out.println("YOUR TURN");
 			//System.out.print("Enter the coordinates of the ship numbered " + number + "\n");
 			
+			System.out.println("USER's " + number + " try");
 			System.out.print("Enter X coordinate: ");
 			int x = input.nextInt();
 	        System.out.print("Enter Y coordinate: ");
@@ -178,16 +179,16 @@ public class Battleship {
 					grid[x+1][y+2] = "!";
 					System.out.println("Boom! You sunk the COMPs ship!\n");
 					user_guess += 1;
-				}else {                                             //Own ship guess
-					if (grid[x+1][y+2] == "@") {
+				}else if(grid[x+1][y+2] == "@") {                    //Own ship guess
 						grid[x+1][y+2] = "x";
 						System.out.println("Oh no, you sunk your own ship :(\n");
-					}
-				}
-			}else {                                                 //Wrong guess
+				}else {                                                 //Wrong guess
 				System.out.println("Sorry, you missed\n");
 				grid[x+1][y+2] = "-";;
-			}
+				}
+	        }else {
+	        	System.out.println("Enter valid numbers. You lost a chance");
+	        }
 	        
 			//Code to calculate user_guess not crossing 5.
 	        
@@ -210,27 +211,27 @@ public class Battleship {
 	        
 			//Computer guessing the ship
 			
-			System.out.println("Computer's TURN\n");
+			System.out.println("Computer's " + number + " TURN\n");
+			//System.out.println("USER's " + number + " try");
 			Random rand = new Random();
 			int xC = rand.nextInt(9)+1;
 	        int yC = rand.nextInt(9)+1;
 	        System.out.println(xC + " " + yC);
-			if(((xC+1)<12 && (yC+2)<12)) {
-				System.out.println("You entered the COmputers loop");
-				if (grid[xC+1][yC+2] == "@") {              //Correct guess
+			
+	        if(((xC+1)<12 && (yC+2)<12)) {
+				System.out.println("You entered the Computers loop");
+				if (grid[xC+1][yC+2] == "@") {                //Correct guess
 					grid[xC+1][yC+2] = "x";
 					System.out.println("Boom! You sunk the USERs ship!\n");
 					comp_guess += 1;
-				}else {
-					if (grid[xC+1][yC+2] == "#") {          //Own ship guess
+				}else if (grid[xC+1][yC+2] == "#") {          //Own ship guess
 						grid[xC+1][yC+2] = "!";
 						System.out.println("Oh no, you sunk your own ship :)\n");
-					}
+				}else {                                       //Wrong guess
+				System.out.println("COMP missed\n");
+				grid[xC+1][yC+2] = "+";
 				}
-			}else {                                         //Wrong guess
-				System.out.println("Sorry, you missed\n");
-				grid[x+1][y+2] = "+";
-			}
+	        }
 			
 			//Code to calculate comp_guess not crossing 5.
 			
@@ -238,7 +239,20 @@ public class Battleship {
 	        	break;
 	        }
 			
+			//Displaying the grid
+			System.out.println("\n");
+			for (String[] x1 : grid){
+			   for (String y1 : x1)
+			   {
+			        System.out.print(y1 + " ");
+			   }
+			   System.out.println();
+			}
+			System.out.println("\n");
+	        
 		}
+		
+		System.out.println("THE game ENDed");
 		
 	}
 }
