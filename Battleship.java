@@ -3,6 +3,9 @@ import java.util.Random;
 
 public class Battleship {
 	
+	//This below line makes sure that it is OK even when the Scanner input leak is never closed.
+	@SuppressWarnings("resource")
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in); 
 		System.out.println("****Welcome to the game of BattleShip****\n");
@@ -85,65 +88,28 @@ public class Battleship {
 				number--;
 			}
 			
-//			//Displaying the grid
-//			for (String[] x1 : grid){
-//			   for (String y1 : x1)
-//			   {
-//			        System.out.print(y1 + " ");
-//			   }
-//			   System.out.println();
-//			}
-//			System.out.println("\n");	
 	    }
 		
-		//Displaying the grid
-//		for (String[] x1 : grid){
-//		   for (String y1 : x1)
-//		   {
-//		        System.out.print(y1 + " ");
-//		   }
-//		   System.out.println();
-//		}
-//		System.out.println("\n");
-		
 		//Code where the computer randomly inserts ships in the sea.
-		
 		System.out.println("\nComputer is deploying ships");
 		for (int number = 1; number < 6; number++) {
-			
-			//System.out.println();
-			//System.out.print("Enter the coordinates of the ship numbered " + number + "\n");
-			//System.out.print("Enter X coordinate for your ship: ");
-	        
+
 			Random rand = new Random();
-			
 			int x = rand.nextInt(9)+1;
 	        //System.out.print("Enter Y coordinate for your ship: ");
 	        int y = rand.nextInt(9)+1;
-	        System.out.println(x + " " + y);
-	        
+	        //System.out.println(x + " " + y);
+	    
 			if(((x+1)<12 && (y+2)<12)) {
 				if (grid[x+1][y+2] != "#" && grid[x+1][y+2] != "@") {
 					grid[x+1][y+2] = "#";
 					System.out.println("Ship " + number + " DEPLOYED");
 				}else {
-					//System.out.println("There is already a specific ship in that location. Please re-enter coordinates.");
 					number--;
 				}
 			}else {
-				//System.out.println("The ship shall be outside the sea. Please re-enter coordinates.");
 				number--;
 			}
-			
-			//Displaying the grid
-//			for (String[] x1 : grid){
-//			   for (String y1 : x1)
-//			   {
-//			        System.out.print(y1 + " ");
-//			   }
-//			   System.out.println();
-//			}
-//			System.out.println("\n");	
 		}
 		
 		//Displaying the grid
@@ -157,13 +123,10 @@ public class Battleship {
 		}
 		System.out.println("\n");	
 		
-		//////////////////////////////////////////////////////////////////////////////////////////
 		//Battle starts
 		System.out.println("BattleShip Game Starts");
 		int comp_ships = 5;
 		int user_ships = 5;
-		int user_guess = 0;
-		int comp_guess = 0;
 		
 		//User guessing the ship
 		while (true) {
@@ -207,20 +170,7 @@ public class Battleship {
 	        	System.out.println("COMP won the Battle");
 	        	break;
 	        }
-	        
-//			//Displaying the grid
-//			System.out.println("\n");
-//			for (String[] x1 : grid){
-//			   for (String y1 : x1)
-//			   {
-//			        System.out.print(y1 + " ");
-//			   }
-//			   System.out.println();
-//			}
-//			System.out.println("\n");
-	        
-	        /////////////////////////////////////////////
-	        
+
 			//Computer guessing the ship
 			
 			System.out.println("COMP's TURN ");
@@ -254,23 +204,10 @@ public class Battleship {
 	        }
 			
 			//Code to calculate comp_guess not crossing 5.
-			
 	        if (comp_ships == 0) {
 	        	System.out.println("USER won the Battle");
 	        	break;
-	        }
-			
-//			//Displaying the grid
-//			System.out.println("\n");
-//			for (String[] x1 : grid){
-//			   for (String y1 : x1)
-//			   {
-//			        System.out.print(y1 + " ");
-//			   }
-//			   System.out.println();
-//			}
-//			System.out.println("\n");
-	        
+	        }				 
 		}
 		
 		System.out.print("-------------------------------------\n");
@@ -285,23 +222,10 @@ public class Battleship {
 		   }
 		   System.out.println();
 		}
+		
 		System.out.println("\n");
 		System.out.println("Your ships: " + user_ships + " | Computer ships: " + comp_ships);
 		System.out.println("-------------------------------------");
 		
-		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
